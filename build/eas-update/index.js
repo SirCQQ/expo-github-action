@@ -15936,12 +15936,14 @@ async function projectOwner(cli = 'expo') {
     return stdout.trim();
 }
 exports.projectOwner = projectOwner;
-async function latestUpdate(cli = 'eas', branch) {
+async function latestUpdate(cli = 'expo', branch) {
     let stdout = '';
     try {
-        ({ stdout } = await (0, exec_1.getExecOutput)(await (0, io_1.which)(cli), ['update:list', '--branch', branch, '--json'], {
+        const command = await (0, io_1.which)(cli);
+        console.log(command);
+        stdout = (await (0, exec_1.getExecOutput)(command, ['update:list', '--branch', branch, '--json'], {
             silent: true,
-        }));
+        })).stdout;
     }
     catch (error) {
         throw new Error(`Could not fetch the project owner, reason:\n${error.message | error}`);

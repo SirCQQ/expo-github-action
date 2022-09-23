@@ -108,13 +108,17 @@ export async function projectOwner(cli: CliName = 'expo'): Promise<string> {
   return stdout.trim();
 }
 
-export async function latestUpdate(cli: CliName = 'eas', branch: string): Promise<string> {
+export async function latestUpdate(cli: CliName = 'expo', branch: string): Promise<string> {
   let stdout = '';
 
   try {
-    ({ stdout } = await getExecOutput(await which(cli), ['update:list', '--branch', branch, '--json'], {
-      silent: true,
-    }));
+    const command = await which(cli);
+    console.log(command);
+    stdout = (
+      await getExecOutput(command, ['update:list', '--branch', branch, '--json'], {
+        silent: true,
+      })
+    ).stdout;
   } catch (error) {
     throw new Error(`Could not fetch the project owner, reason:\n${error.message | error}`);
   }
