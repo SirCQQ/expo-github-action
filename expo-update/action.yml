@@ -7,7 +7,7 @@ branding:
   color: gray-dark
 runs:
   using: node16
-  main: ../build/preview-comment/index.js
+  main: ../build/expo-update/index.js
 inputs:
   project:
     description: Path to the Expo project, relative from the workspace
