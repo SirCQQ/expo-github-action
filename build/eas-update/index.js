@@ -15770,7 +15770,7 @@ const updateInput = () => {
         messageId: (0, core_1.getInput)('message-id') || preview_comment_1.DEFAULT_ID,
         project: (0, core_1.getInput)('project'),
         githubToken: (0, core_1.getInput)('github-token'),
-        updateResult: (0, core_1.getInput)('update-result'),
+        updateResult: (0, core_1.getMultilineInput)('update-result'),
     };
 };
 exports.updateInput = updateInput;

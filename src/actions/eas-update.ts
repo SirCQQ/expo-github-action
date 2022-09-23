@@ -1,4 +1,4 @@
-import { getBooleanInput, getInput } from '@actions/core';
+import { getBooleanInput, getInput, getMultilineInput } from '@actions/core';
 
 // import {} from '@actions/github'
 import { projectInfo, projectOwner } from '../expo';
@@ -14,7 +14,7 @@ export const updateInput = () => {
     messageId: getInput('message-id') || DEFAULT_ID,
     project: getInput('project'),
     githubToken: getInput('github-token'),
-    updateResult: getInput('update-result'),
+    updateResult: getMultilineInput('update-result'),
   };
 };
 
