@@ -25,7 +25,7 @@ export async function updateAction(input: CommentInput = updateInput()) {
   if (!project.owner) {
     project.owner = await projectOwner();
   }
-  console.log('This is the output ', { input, project });
+  console.log('This is the output v1', { input, project });
 }
 
 executeAction(updateAction);

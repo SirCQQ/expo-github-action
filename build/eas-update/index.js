@@ -15781,7 +15781,7 @@ async function updateAction(input = (0, exports.updateInput)()) {
     if (!project.owner) {
         project.owner = await (0, expo_1.projectOwner)();
     }
-    console.log('This is the output ', { input, project });
+    console.log('This is the output v1', { input, project });
 }
 exports.updateAction = updateAction;
 (0, worker_1.executeAction)(updateAction);
