@@ -15798,7 +15798,7 @@ async function updateAction(input = (0, exports.updateInput)()) {
         projectSlug: project.slug,
         channel: input.channel,
     };
-    const update = await (0, expo_1.lastUpdate)('eas', `${input.channel}`);
+    const update = await (0, expo_1.lastUpdate)('eas', input.channel);
     const messageId = (0, utils_1.template)(input.messageId, variables);
     let messageBody = (0, utils_1.template)(input.message, variables);
     if (input.ios) {
@@ -16005,9 +16005,9 @@ async function lastUpdate(cli = 'eas', branch) {
     const groupId = await latestUpdates(cli, branch);
     let stdout = '';
     try {
-        const command = await (0, io_1.which)('eac');
+        const command = await (0, io_1.which)(cli);
         const args = ['update:view ', groupId, '--json'];
-        console.log('command', `${command} ${args.join(' ')}`);
+        console.log('command', `||| ${command} ${args.join(' ')}`);
         stdout = (await (0, exec_1.getExecOutput)(command, args, {
             silent: true,
         })).stdout;

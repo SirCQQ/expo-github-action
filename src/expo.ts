@@ -162,9 +162,9 @@ export async function lastUpdate(cli: CliName = 'eas', branch: string): Promise<
   const groupId = await latestUpdates(cli, branch);
   let stdout = '';
   try {
-    const command = await which('eac');
+    const command = await which(cli);
     const args = ['update:view ', groupId, '--json'];
-    console.log('command', `${command} ${args.join(' ')}`);
+    console.log('command', `||| ${command} ${args.join(' ')}`);
     stdout = (
       await getExecOutput(command, args, {
         silent: true,

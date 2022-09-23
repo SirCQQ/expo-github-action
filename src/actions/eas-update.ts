@@ -48,7 +48,7 @@ export async function updateAction(input: UpdateInput = updateInput()) {
     channel: input.channel,
   };
 
-  const update = await lastUpdate('eas', `${input.channel}`);
+  const update = await lastUpdate('eas', input.channel);
   const messageId = template(input.messageId, variables);
   let messageBody = template(input.message, variables);
   if (input.ios) {
