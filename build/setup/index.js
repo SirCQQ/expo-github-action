@@ -67084,7 +67084,7 @@ function projectQR(project, channel) {
 exports.projectQR = projectQR;
 function createEasQr(updateId) {
     (0, assert_1.ok)(updateId, 'Could not create a QR code for project without the updateId');
-    const url = new url_1.URL('https://qr.expo.dev/eas-update?updateId=c4ba851a-d02d-401a-824d-700c26714e57');
+    const url = new url_1.URL('https://qr.expo.dev/eas-update');
     url.searchParams.append('updateId', updateId);
     url.searchParams.append('appScheme', 'exp');
     url.searchParams.append('host', 'u.expo.dev');
