@@ -30,4 +30,9 @@ inputs:
     description: GitHub access token to comment on PRs
     required: false
     default: ${{ github.token }}
-
+  ios-id:
+    description: An unique identifier for the IOS EAS update 
+    required: true
+  android-id:
+    description: An unique identifier for the Android EAS update
+    required: true
