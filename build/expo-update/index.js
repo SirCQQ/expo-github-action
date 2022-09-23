@@ -16485,13 +16485,14 @@ var __webpack_exports__ = {};
 var exports = __webpack_exports__;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
+const expo_1 = __nccwpck_require__(2489);
 const worker_1 = __nccwpck_require__(8912);
 const preview_comment_1 = __nccwpck_require__(4478);
 (0, worker_1.executeAction)(async (input = (0, preview_comment_1.commentInput)()) => {
-    // const project = await projectInfo(input.project);
-    // if (!project.owner) {
-    //   project.owner = await projectOwner();
-    // }
+    const project = await (0, expo_1.projectInfo)(input.project);
+    if (!project.owner) {
+        project.owner = await (0, expo_1.projectOwner)();
+    }
     console.log(input);
 });
 
