@@ -14,7 +14,7 @@ export const DEFAULT_MESSAGE_FOR_UPDATE =
   `\n- Project: **@{projectOwner}/{projectSlug}**` +
   `\n- Branch: **{channel}**`;
 
-export const DEFAULT_SYSTEM_QR = `\n\n For {system}: \n <a href="{qr}"><img src={qr} height="200px" width="200px"></a>`;
+export const DEFAULT_SYSTEM_QR = `\n\n For {system}: \n <a href="{qr}"><img src="{qr}" height="200px" width="200px"></a>`;
 
 export const updateInput = () => {
   return {

@@ -15767,7 +15767,7 @@ const preview_comment_1 = __nccwpck_require__(4478);
 exports.DEFAULT_MESSAGE_FOR_UPDATE = `This pull request was automatically deployed using [Expo GitHub Actions](https://github.com/expo/expo-github-action/tree/main/preview-comment)!\n` +
     `\n- Project: **@{projectOwner}/{projectSlug}**` +
     `\n- Branch: **{channel}**`;
-exports.DEFAULT_SYSTEM_QR = `\n\n For {system}: \n <a href="{qr}"><img src={qr} height="200px" width="200px"></a>`;
+exports.DEFAULT_SYSTEM_QR = `\n\n For {system}: \n <a href="{qr}"><img src="{qr}" height="200px" width="200px"></a>`;
 const updateInput = () => {
     return {
         channel: (0, core_1.getInput)('channel') || 'default',
