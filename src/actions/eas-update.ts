@@ -16,7 +16,7 @@ export const updateInput = () => {
     messageId: getInput('message-id') || DEFAULT_ID,
     project: getInput('project'),
     githubToken: getInput('github-token'),
-    context: pullContext(),
+    updateResult: getInput('update-result'),
   };
 };
 
