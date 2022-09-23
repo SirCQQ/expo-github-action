@@ -16068,7 +16068,10 @@ function pullContext() {
     if (process.env['EXPO_TEST_GITHUB_PULL']) {
         return { ...github_1.context.repo, number: Number(process.env['EXPO_TEST_GITHUB_PULL']) };
     }
-    (0, assert_1.ok)(github_1.context.eventName === 'pull_request', 'Could not find the pull request context, make sure to run this from a pull_request triggered workflow');
+    // assert(
+    //   // context.eventName === 'pull_request',
+    //   // 'Could not find the pull request context, make sure to run this from a pull_request triggered workflow'
+    // );
     return github_1.context.issue;
 }
 exports.pullContext = pullContext;
@@ -16482,15 +16485,14 @@ var __webpack_exports__ = {};
 var exports = __webpack_exports__;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const expo_1 = __nccwpck_require__(2489);
 const worker_1 = __nccwpck_require__(8912);
 const preview_comment_1 = __nccwpck_require__(4478);
 (0, worker_1.executeAction)(async (input = (0, preview_comment_1.commentInput)()) => {
-    const project = await (0, expo_1.projectInfo)(input.project);
-    if (!project.owner) {
-        project.owner = await (0, expo_1.projectOwner)();
-    }
-    console.log(project);
+    // const project = await projectInfo(input.project);
+    // if (!project.owner) {
+    //   project.owner = await projectOwner();
+    // }
+    console.log(input);
 });
 
 })();
