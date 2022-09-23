@@ -1,7 +1,7 @@
 ---
-name: Expo GitHub Action - Preview comment
+name: Expo GitHub Action - EAS Update
 author: Expo
-description: Add Expo preview comments to pull requests
+description: Add Expo preview comments to pull requests after EAS update
 branding:
   icon: message-circle
   color: gray-dark
