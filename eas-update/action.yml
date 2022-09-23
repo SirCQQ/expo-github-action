@@ -33,3 +33,11 @@ inputs:
   update-result:
     description: The result parsed from EAS update 
     required: true
+  is-ios-build:
+    description: Flag is should generate QR for IOS build 
+    required: true
+    default: true
+  is-android-build:
+    description: Flag is should generate QR for Adroid build 
+    required: true
+    default: true
