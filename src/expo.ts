@@ -108,6 +108,26 @@ export async function projectOwner(cli: CliName = 'expo'): Promise<string> {
   return stdout.trim();
 }
 
+export async function latestUpdate(cli: CliName = 'eas', branch: string): Promise<string> {
+  let stdout = '';
+
+  try {
+    ({ stdout } = await getExecOutput(await which(cli), ['update:list', '--branch', branch, '--json'], {
+      silent: true,
+    }));
+  } catch (error) {
+    throw new Error(`Could not fetch the project owner, reason:\n${error.message | error}`);
+  }
+
+  if (!stdout) {
+    throw new Error(`Could not fetch the project owner, not authenticated`);
+  } else if (stdout.endsWith(' (robot)')) {
+    throw new Error(`Could not fetch the project owner, used robot account`);
+  }
+
+  return stdout.trim();
+}
+
 export async function runCommand(cmd: Command) {
   let stdout = '';
   let stderr = '';

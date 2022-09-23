@@ -15779,6 +15779,10 @@ async function updateAction(input = (0, exports.updateInput)()) {
     if (!project.owner) {
         project.owner = await (0, expo_1.projectOwner)();
     }
+    if (!input.channel) {
+        throw new Error("'channel' variable is needed");
+    }
+    input.latestUpdate = await (0, expo_1.latestUpdate)('eas', `pr-${input.channel}`);
     console.log('This is the output v1', { input, project });
 }
 exports.updateAction = updateAction;
@@ -15860,7 +15864,7 @@ exports.commentAction = commentAction;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.getBuildLogsUrl = exports.projectDeepLink = exports.projectLink = exports.projectQR = exports.projectInfo = exports.easBuild = exports.runCommand = exports.projectOwner = exports.authenticate = exports.parseCommand = exports.appPlatformEmojis = exports.appPlatformDisplayNames = exports.AppPlatform = void 0;
+exports.getBuildLogsUrl = exports.projectDeepLink = exports.projectLink = exports.projectQR = exports.projectInfo = exports.easBuild = exports.runCommand = exports.latestUpdate = exports.projectOwner = exports.authenticate = exports.parseCommand = exports.appPlatformEmojis = exports.appPlatformDisplayNames = exports.AppPlatform = void 0;
 const core_1 = __nccwpck_require__(2186);
 const exec_1 = __nccwpck_require__(1514);
 const io_1 = __nccwpck_require__(7436);
@@ -15932,6 +15936,25 @@ async function projectOwner(cli = 'expo') {
     return stdout.trim();
 }
 exports.projectOwner = projectOwner;
+async function latestUpdate(cli = 'eas', branch) {
+    let stdout = '';
+    try {
+        ({ stdout } = await (0, exec_1.getExecOutput)(await (0, io_1.which)(cli), ['update:list', '--branch', branch, '--json'], {
+            silent: true,
+        }));
+    }
+    catch (error) {
+        throw new Error(`Could not fetch the project owner, reason:\n${error.message | error}`);
+    }
+    if (!stdout) {
+        throw new Error(`Could not fetch the project owner, not authenticated`);
+    }
+    else if (stdout.endsWith(' (robot)')) {
+        throw new Error(`Could not fetch the project owner, used robot account`);
+    }
+    return stdout.trim();
+}
+exports.latestUpdate = latestUpdate;
 async function runCommand(cmd) {
     let stdout = '';
     let stderr = '';

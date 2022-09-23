@@ -1,10 +1,12 @@
-import { getBooleanInput, getInput, getMultilineInput } from '@actions/core';
+import { getBooleanInput, getInput, getMultilineInput, error } from '@actions/core';
 
 // import {} from '@actions/github'
-import { projectInfo, projectOwner } from '../expo';
+import { latestUpdate, projectInfo, projectOwner } from '../expo';
 import { pullContext } from '../github';
 import { executeAction } from '../worker';
 import { CommentInput, DEFAULT_ID, DEFAULT_MESSAGE } from './preview-comment';
+
+export type UpdateInput = ReturnType<typeof updateInput> & { latestUpdate?: string };
 
 export const updateInput = () => {
   return {
@@ -18,11 +20,15 @@ export const updateInput = () => {
   };
 };
 
-export async function updateAction(input: CommentInput = updateInput()) {
+export async function updateAction(input: UpdateInput = updateInput()) {
   const project = await projectInfo(input.project);
   if (!project.owner) {
     project.owner = await projectOwner();
   }
+  if (!input.channel) {
+    throw new Error("'channel' variable is needed");
+  }
+  input.latestUpdate = await latestUpdate('eas', `pr-${input.channel}`);
   console.log('This is the output v1', { input, project });
 }
 
