@@ -54,7 +54,7 @@ You can read more about this in the [GitHub Actions documentation][link-actions]
 1. [Publish on any push to main](#publish-on-any-push-to-main)
 2. [Creating a new EAS build](#creating-a-new-eas-build)
 3. [Publish a preview from PR](#publish-a-preview-from-PR)
-4. [Publish a preview from PR with EAS update]($publish-a-preview-from-pr-with-eas-update)
+4. [Publish a preview from PR with EAS update](#publish-a-preview-from-pr-with-eas-update)
 
 ### Publish on any push to main
 
