@@ -27,7 +27,7 @@ export async function updateAction(input: UpdateInput = updateInput()) {
   if (!input.channel) {
     throw new Error("'channel' variable is needed");
   }
-  input.latestUpdate = await latestUpdate('eas', `pr-${input.channel}`);
+  input.latestUpdate = await latestUpdate('eas', `${input.channel}`);
   console.log('This is the output v1', { input, project });
 }
 
