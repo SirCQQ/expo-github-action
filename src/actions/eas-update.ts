@@ -1,10 +1,9 @@
-import { getBooleanInput, getInput, getMultilineInput, error } from '@actions/core';
+import { getBooleanInput, getInput, getMultilineInput } from '@actions/core';
 
 // import {} from '@actions/github'
 import { latestUpdate, projectInfo, projectOwner } from '../expo';
-import { pullContext } from '../github';
 import { executeAction } from '../worker';
-import { CommentInput, DEFAULT_ID, DEFAULT_MESSAGE } from './preview-comment';
+import { DEFAULT_ID, DEFAULT_MESSAGE } from './preview-comment';
 
 export type UpdateInput = ReturnType<typeof updateInput> & { latestUpdate?: string };
 

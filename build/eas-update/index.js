@@ -15940,8 +15940,9 @@ async function latestUpdate(cli = 'expo', branch) {
     let stdout = '';
     try {
         const command = await (0, io_1.which)(cli);
-        console.log(command);
-        stdout = (await (0, exec_1.getExecOutput)(command, ['update:list', '--branch', branch, '--json'], {
+        const args = ['update:list', '--branch', branch, '--json'];
+        console.log('command:', `${command} ${args.join(' ')}`);
+        stdout = (await (0, exec_1.getExecOutput)(command, args, {
             silent: true,
         })).stdout;
     }

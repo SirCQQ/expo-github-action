@@ -113,9 +113,10 @@ export async function latestUpdate(cli: CliName = 'expo', branch: string): Promi
 
   try {
     const command = await which(cli);
-    console.log(command);
+    const args = ['update:list', '--branch', branch, '--json'];
+    console.log('command:', `${command} ${args.join(' ')}`);
     stdout = (
-      await getExecOutput(command, ['update:list', '--branch', branch, '--json'], {
+      await getExecOutput(command, args, {
         silent: true,
       })
     ).stdout;
