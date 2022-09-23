@@ -30,6 +30,9 @@ inputs:
     description: GitHub access token to comment on PRs
     required: false
     default: ${{ github.token }}
+  update-result:
+    description: The result parsed from EAS update 
+    required: true
   is-ios-build:
     description: Flag is should generate QR for IOS build 
     required: true
@@ -38,22 +41,3 @@ inputs:
     description: Flag is should generate QR for Adroid build 
     required: true
     default: true
-outputs:
-  projectOwner:
-    description: The resolved project owner
-  projectName:
-    description: The resolved project name
-  projectSlug:
-    description: The resolved project slug
-  projectLink:
-    description: The absolute link to the project on expo.dev
-  messageId:
-    description: The resolved message id
-  projectQR:
-    description: The absolute URL to the QR code
-  message:
-    description: The resolved message content
-  iosQr:
-    description: The QR code for the IOS Update
-  androidQr:
-    description: The QR code for the Android Update

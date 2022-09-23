@@ -1,7 +1,7 @@
-import { getBooleanInput, getInput, getMultilineInput, info, setOutput } from '@actions/core';
+import { getBooleanInput, getInput, getMultilineInput, info } from '@actions/core';
 
 // import {} from '@actions/github'
-import { createEasQr, lastUpdate, projectDeepLink, projectInfo, projectLink, projectOwner, projectQR } from '../expo';
+import { createEasQr, lastUpdate, projectDeepLink, projectInfo, projectLink, projectOwner } from '../expo';
 import { createIssueComment, pullContext } from '../github';
 import { template } from '../utils';
 import { executeAction } from '../worker';
@@ -45,7 +45,6 @@ export async function updateAction(input: UpdateInput = updateInput()) {
     projectName: project.name,
     projectOwner: project.owner || '',
     projectSlug: project.slug,
-    projectQR: projectQR(project, input.channel),
     channel: input.channel,
   };
 
@@ -55,17 +54,15 @@ export async function updateAction(input: UpdateInput = updateInput()) {
   if (input.ios) {
     const iosUpdate = update.find(u => u.platform === 'ios');
     if (iosUpdate) {
-      const iosQr = createEasQr(iosUpdate.id);
-      variables.iosQr = iosQr;
-      messageBody += template(DEFAULT_SYSTEM_QR, { system: 'ios', qr: iosQr });
+      const id = iosUpdate.id;
+      messageBody += template(DEFAULT_SYSTEM_QR, { system: 'ios', qr: createEasQr(id) });
     }
   }
   if (input.android) {
     const iosUpdate = update.find(u => u.platform === 'android');
     if (iosUpdate) {
-      const androidQr = createEasQr(iosUpdate.id);
-      variables.androidQr = androidQr;
-      messageBody += template(DEFAULT_SYSTEM_QR, { system: 'android', qr: androidQr });
+      const id = iosUpdate.id;
+      messageBody += template(DEFAULT_SYSTEM_QR, { system: 'android', qr: createEasQr(id) });
     }
   }
   if (!input.comment) {
@@ -78,12 +75,6 @@ export async function updateAction(input: UpdateInput = updateInput()) {
       body: messageBody,
     });
   }
-  for (const name in variables) {
-    setOutput(name, variables[name]);
-  }
-
-  setOutput('messageId', messageId);
-  setOutput('message', messageBody);
 }
 
 executeAction(updateAction);
