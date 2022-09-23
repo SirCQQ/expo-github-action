@@ -185,7 +185,7 @@ You can also automatically publish the project for the reviewer to skip those ma
 
 This workflow publishes the changes on the `pr-#` [release channel][link-expo-release-channels] and adds a comment to the pull request once it's ready for review.
 
-This action is used to add QR for preview on the PR with the latest `Update` made on eas.
+This action is used to add QR for preview on the PR with the latest `Update` made on EAS.
 
 > See the [eas-update docs](./eas-update).
 
@@ -217,12 +217,12 @@ jobs:
       - name: 📦 Install dependencies
         run: yarn install
 
-      - name: Eas Update
+      - name: 🚀 Eas Update
         id: update
         run: |
           eas update --branch pr-${{ github.event.number }} --json --non-interactive --message test-message
 
-      - uses: expo/expo-github-action/eas-update@7
+      - uses: 💬 expo/expo-github-action/eas-update@7
         with:
           channel: pr-${{ github.event.number }}
           is-ios-build: false

@@ -1,6 +1,6 @@
 <div align="center">
-  <h1>expo-github-action/preview-comment</h1>
-  <p>Add <a href="https://github.com/expo/expo">Expo</a> preview comments to pull requests</p>
+  <h1>expo-github-action/eas-update</h1>
+  <p>Add <a href="https://github.com/expo/expo">Expo</a> preview comments to pull requests for EAS updates</p>
   <p>
     <a href="https://github.com/expo/expo-github-action/releases">
       <img src="https://img.shields.io/github/v/release/expo/expo-github-action" alt="releases" />
@@ -110,12 +110,12 @@ jobs:
       - name: 📦 Install dependencies
         run: yarn install
 
-      - name: Eas Update
+      - name: 🚀 Eas Update
         id: update
         run: |
           eas update --branch pr-${{ github.event.number }} --json --non-interactive --message test-message
 
-      - uses: expo/expo-github-action/eas-update@7
+      - uses: 💬 expo/expo-github-action/eas-update@7
         with:
           channel: pr-${{ github.event.number }}
           is-ios-build: false
@@ -158,7 +158,7 @@ jobs:
       - name: 📦 Install dependencies
         run: yarn install
 
-      - name: Eas Update
+      - name: 🚀 Eas Update
         id: update
         run: |
           eas update --branch production --json --non-interactive --message test-message
