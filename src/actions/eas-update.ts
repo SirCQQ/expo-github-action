@@ -8,8 +8,6 @@ import { CommentInput, DEFAULT_ID, DEFAULT_MESSAGE } from './preview-comment';
 
 export const updateInput = () => {
   return {
-    iosId: getInput('ios-id'),
-    androidId: getInput('android-id'),
     channel: getInput('channel') || 'default',
     comment: !getInput('comment') || getBooleanInput('comment'),
     message: getInput('message') || DEFAULT_MESSAGE,

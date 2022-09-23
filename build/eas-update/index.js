@@ -15764,8 +15764,6 @@ const worker_1 = __nccwpck_require__(8912);
 const preview_comment_1 = __nccwpck_require__(4478);
 const updateInput = () => {
     return {
-        iosId: (0, core_1.getInput)('ios-id'),
-        androidId: (0, core_1.getInput)('android-id'),
         channel: (0, core_1.getInput)('channel') || 'default',
         comment: !(0, core_1.getInput)('comment') || (0, core_1.getBooleanInput)('comment'),
         message: (0, core_1.getInput)('message') || preview_comment_1.DEFAULT_MESSAGE,
