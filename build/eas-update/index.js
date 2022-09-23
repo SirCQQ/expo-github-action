@@ -16007,6 +16007,7 @@ async function lastUpdate(cli = 'eas', branch) {
     try {
         const command = await (0, io_1.which)('eac');
         const args = ['update:view ', groupId, '--json'];
+        console.log('command', `${command} ${args.join(' ')}`);
         stdout = (await (0, exec_1.getExecOutput)(command, args, {
             silent: true,
         })).stdout;
