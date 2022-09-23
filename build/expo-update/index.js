@@ -16485,16 +16485,30 @@ var __webpack_exports__ = {};
 var exports = __webpack_exports__;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
+const core_1 = __nccwpck_require__(2186);
 const expo_1 = __nccwpck_require__(2489);
 const worker_1 = __nccwpck_require__(8912);
 const preview_comment_1 = __nccwpck_require__(4478);
-(0, worker_1.executeAction)(async (input = (0, preview_comment_1.commentInput)()) => {
+(0, worker_1.executeAction)(updateAction);
+const updateInput = () => {
+    return {
+        iosId: (0, core_1.getInput)('ios-id'),
+        androidId: (0, core_1.getInput)('android-id'),
+        channel: (0, core_1.getInput)('channel') || 'default',
+        comment: !(0, core_1.getInput)('comment') || (0, core_1.getBooleanInput)('comment'),
+        message: (0, core_1.getInput)('message') || preview_comment_1.DEFAULT_MESSAGE,
+        messageId: (0, core_1.getInput)('message-id') || preview_comment_1.DEFAULT_ID,
+        project: (0, core_1.getInput)('project'),
+        githubToken: (0, core_1.getInput)('github-token'),
+    };
+};
+async function updateAction(input = updateInput()) {
     const project = await (0, expo_1.projectInfo)(input.project);
     if (!project.owner) {
         project.owner = await (0, expo_1.projectOwner)();
     }
     console.log('This is the output ', { input, project });
-});
+}
 
 })();
 
