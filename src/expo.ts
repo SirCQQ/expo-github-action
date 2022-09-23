@@ -144,6 +144,7 @@ export async function latestUpdates(cli: CliName = 'eas', branch: string): Promi
       })
     ).stdout;
   } catch (error) {
+    console.log(error);
     throw new Error(`Could not fetch latest updates, reason:\n${error.message | error}`);
   }
 
@@ -162,14 +163,15 @@ export async function lastUpdate(cli: CliName = 'eas', branch: string): Promise<
   let stdout = '';
   try {
     const command = await which('eac');
-    const args = [groupId, '--json'];
+    const args = ['update:view ', groupId, '--json'];
     stdout = (
       await getExecOutput(command, args, {
         silent: true,
       })
     ).stdout;
   } catch (error) {
-    throw new Error(`Could not fetch the lastet update, reason:\n${error.message | error}`);
+    console.log(error);
+    throw new Error(`Could not fetch the last update, reason:\n${error.message | error}`);
   }
   const result = JSON.parse(stdout) as Update[];
   if (!Array.isArray(result)) {

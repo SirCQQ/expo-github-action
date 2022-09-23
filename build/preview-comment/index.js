@@ -15905,6 +15905,7 @@ async function latestUpdates(cli = 'eas', branch) {
         })).stdout;
     }
     catch (error) {
+        console.log(error);
         throw new Error(`Could not fetch latest updates, reason:\n${error.message | error}`);
     }
     if (!stdout) {
@@ -15922,13 +15923,14 @@ async function lastUpdate(cli = 'eas', branch) {
     let stdout = '';
     try {
         const command = await (0, io_1.which)('eac');
-        const args = [groupId, '--json'];
+        const args = ['update:view ', groupId, '--json'];
         stdout = (await (0, exec_1.getExecOutput)(command, args, {
             silent: true,
         })).stdout;
     }
     catch (error) {
-        throw new Error(`Could not fetch the lastet update, reason:\n${error.message | error}`);
+        console.log(error);
+        throw new Error(`Could not fetch the last update, reason:\n${error.message | error}`);
     }
     const result = JSON.parse(stdout);
     if (!Array.isArray(result)) {
