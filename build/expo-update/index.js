@@ -16493,7 +16493,7 @@ const preview_comment_1 = __nccwpck_require__(4478);
     if (!project.owner) {
         project.owner = await (0, expo_1.projectOwner)();
     }
-    console.log(input, project);
+    console.log('This is the output ', { input, project });
 });
 
 })();

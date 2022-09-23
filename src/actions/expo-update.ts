@@ -7,5 +7,5 @@ executeAction(async (input: CommentInput = commentInput()) => {
   if (!project.owner) {
     project.owner = await projectOwner();
   }
-  console.log(input, project);
+  console.log('This is the output ', { input, project });
 });
