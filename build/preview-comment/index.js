@@ -15823,7 +15823,7 @@ exports.commentAction = commentAction;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.getBuildLogsUrl = exports.projectDeepLink = exports.projectLink = exports.projectQR = exports.projectInfo = exports.easBuild = exports.runCommand = exports.latestUpdate = exports.projectOwner = exports.authenticate = exports.parseCommand = exports.appPlatformEmojis = exports.appPlatformDisplayNames = exports.AppPlatform = void 0;
+exports.getBuildLogsUrl = exports.projectDeepLink = exports.projectLink = exports.createEasQr = exports.projectQR = exports.projectInfo = exports.easBuild = exports.runCommand = exports.lastUpdate = exports.latestUpdates = exports.projectOwner = exports.authenticate = exports.parseCommand = exports.appPlatformEmojis = exports.appPlatformDisplayNames = exports.AppPlatform = void 0;
 const core_1 = __nccwpck_require__(2186);
 const exec_1 = __nccwpck_require__(1514);
 const io_1 = __nccwpck_require__(7436);
@@ -15895,28 +15895,48 @@ async function projectOwner(cli = 'expo') {
     return stdout.trim();
 }
 exports.projectOwner = projectOwner;
-async function latestUpdate(cli = 'expo', branch) {
+async function latestUpdates(cli = 'eas', branch) {
     let stdout = '';
     try {
         const command = await (0, io_1.which)(cli);
         const args = ['update:list', '--branch', branch, '--json'];
-        console.log('command:', `${command} ${args.join(' ')}`);
         stdout = (await (0, exec_1.getExecOutput)(command, args, {
             silent: true,
         })).stdout;
     }
     catch (error) {
-        throw new Error(`Could not fetch the project owner, reason:\n${error.message | error}`);
+        throw new Error(`Could not fetch latest updates, reason:\n${error.message | error}`);
     }
     if (!stdout) {
-        throw new Error(`Could not fetch the project owner, not authenticated`);
+        throw new Error(`Could not fetch the update history`);
     }
-    else if (stdout.endsWith(' (robot)')) {
-        throw new Error(`Could not fetch the project owner, used robot account`);
+    const result = JSON.parse(stdout.trim());
+    if (!Array.isArray(result)) {
+        throw new Error('The result is valid');
     }
-    return stdout.trim();
+    return result[0].group;
 }
-exports.latestUpdate = latestUpdate;
+exports.latestUpdates = latestUpdates;
+async function lastUpdate(cli = 'eas', branch) {
+    const groupId = await latestUpdates(cli, branch);
+    let stdout = '';
+    try {
+        const command = await (0, io_1.which)('eac');
+        const args = [groupId, '--json'];
+        stdout = (await (0, exec_1.getExecOutput)(command, args, {
+            silent: true,
+        })).stdout;
+    }
+    catch (error) {
+        throw new Error(`Could not fetch the lastet update, reason:\n${error.message | error}`);
+    }
+    const result = JSON.parse(stdout);
+    if (!Array.isArray(result)) {
+        throw new Error('Could not fetch the last update.');
+    }
+    return result;
+}
+exports.lastUpdate = lastUpdate;
 async function runCommand(cmd) {
     let stdout = '';
     let stderr = '';
@@ -15977,6 +15997,15 @@ function projectQR(project, channel) {
     return url.toString();
 }
 exports.projectQR = projectQR;
+function createEasQr(updateId) {
+    (0, assert_1.ok)(updateId, 'Could not create a QR code for project without the updateId');
+    const url = new url_1.URL('https://qr.expo.dev/eas-update?updateId=c4ba851a-d02d-401a-824d-700c26714e57');
+    url.searchParams.append('updateId', updateId);
+    url.searchParams.append('appScheme', 'exp');
+    url.searchParams.append('host', 'u.expo.dev');
+    return url.toString();
+}
+exports.createEasQr = createEasQr;
 /**
  * Create a link for the project in Expo.
  */
