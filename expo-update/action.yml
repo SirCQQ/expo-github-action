@@ -12,6 +12,7 @@ inputs:
   project:
     description: Path to the Expo project, relative from the workspace
     required: false
+    default: .
   channel:
     description: Release channel to preview
     required: false

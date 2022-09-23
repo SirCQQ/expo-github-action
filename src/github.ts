@@ -92,10 +92,10 @@ export function pullContext(): IssueContext {
     return { ...context.repo, number: Number(process.env['EXPO_TEST_GITHUB_PULL']) };
   }
 
-  assert(
-    context.eventName === 'pull_request',
-    'Could not find the pull request context, make sure to run this from a pull_request triggered workflow'
-  );
+  // assert(
+  //   // context.eventName === 'pull_request',
+  //   // 'Could not find the pull request context, make sure to run this from a pull_request triggered workflow'
+  // );
   return context.issue;
 }
 
