@@ -28,6 +28,7 @@ export async function updateAction(input: UpdateInput = updateInput()) {
     throw new Error("'channel' variable is needed");
   }
   input.latestUpdate = await latestUpdate('eas', `${input.channel}`);
+  console.log('typeof', typeof input.latestUpdate);
   console.log('This is the output v1', { input, project });
 }
 
