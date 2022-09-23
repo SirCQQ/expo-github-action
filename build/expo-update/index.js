@@ -15750,6 +15750,43 @@ function wrappy (fn, cb) {
 
 /***/ }),
 
+/***/ 6139:
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.updateAction = exports.updateInput = void 0;
+const core_1 = __nccwpck_require__(2186);
+const expo_1 = __nccwpck_require__(2489);
+const worker_1 = __nccwpck_require__(8912);
+const preview_comment_1 = __nccwpck_require__(4478);
+const updateInput = () => {
+    return {
+        iosId: (0, core_1.getInput)('ios-id'),
+        androidId: (0, core_1.getInput)('android-id'),
+        channel: (0, core_1.getInput)('channel') || 'default',
+        comment: !(0, core_1.getInput)('comment') || (0, core_1.getBooleanInput)('comment'),
+        message: (0, core_1.getInput)('message') || preview_comment_1.DEFAULT_MESSAGE,
+        messageId: (0, core_1.getInput)('message-id') || preview_comment_1.DEFAULT_ID,
+        project: (0, core_1.getInput)('project'),
+        githubToken: (0, core_1.getInput)('github-token'),
+    };
+};
+exports.updateInput = updateInput;
+async function updateAction(input = (0, exports.updateInput)()) {
+    const project = await (0, expo_1.projectInfo)(input.project);
+    if (!project.owner) {
+        project.owner = await (0, expo_1.projectOwner)();
+    }
+    console.log('This is the output ', { input, project });
+}
+exports.updateAction = updateAction;
+(0, worker_1.executeAction)(updateAction);
+
+
+/***/ }),
+
 /***/ 4478:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
@@ -16478,40 +16515,12 @@ module.exports = JSON.parse('[[[0,44],"disallowed_STD3_valid"],[[45,46],"valid"]
 /******/ 	if (typeof __nccwpck_require__ !== 'undefined') __nccwpck_require__.ab = __dirname + "/";
 /******/ 	
 /************************************************************************/
-var __webpack_exports__ = {};
-// This entry need to be wrapped in an IIFE because it need to be in strict mode.
-(() => {
-"use strict";
-var exports = __webpack_exports__;
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-const core_1 = __nccwpck_require__(2186);
-const expo_1 = __nccwpck_require__(2489);
-const worker_1 = __nccwpck_require__(8912);
-const preview_comment_1 = __nccwpck_require__(4478);
-(0, worker_1.executeAction)(updateAction);
-const updateInput = () => {
-    return {
-        iosId: (0, core_1.getInput)('ios-id'),
-        androidId: (0, core_1.getInput)('android-id'),
-        channel: (0, core_1.getInput)('channel') || 'default',
-        comment: !(0, core_1.getInput)('comment') || (0, core_1.getBooleanInput)('comment'),
-        message: (0, core_1.getInput)('message') || preview_comment_1.DEFAULT_MESSAGE,
-        messageId: (0, core_1.getInput)('message-id') || preview_comment_1.DEFAULT_ID,
-        project: (0, core_1.getInput)('project'),
-        githubToken: (0, core_1.getInput)('github-token'),
-    };
-};
-async function updateAction(input = updateInput()) {
-    const project = await (0, expo_1.projectInfo)(input.project);
-    if (!project.owner) {
-        project.owner = await (0, expo_1.projectOwner)();
-    }
-    console.log('This is the output ', { input, project });
-}
-
-})();
-
-module.exports = __webpack_exports__;
+/******/ 	
+/******/ 	// startup
+/******/ 	// Load entry module and return exports
+/******/ 	// This entry module is referenced by other modules so it can't be inlined
+/******/ 	var __webpack_exports__ = __nccwpck_require__(6139);
+/******/ 	module.exports = __webpack_exports__;
+/******/ 	
 /******/ })()
 ;

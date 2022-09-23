@@ -4,9 +4,7 @@ import { projectInfo, projectOwner } from '../expo';
 import { executeAction } from '../worker';
 import { CommentInput, DEFAULT_ID, DEFAULT_MESSAGE } from './preview-comment';
 
-executeAction(updateAction);
-
-const updateInput = () => {
+export const updateInput = () => {
   return {
     iosId: getInput('ios-id'),
     androidId: getInput('android-id'),
@@ -19,10 +17,12 @@ const updateInput = () => {
   };
 };
 
-async function updateAction(input: CommentInput = updateInput()) {
+export async function updateAction(input: CommentInput = updateInput()) {
   const project = await projectInfo(input.project);
   if (!project.owner) {
     project.owner = await projectOwner();
   }
   console.log('This is the output ', { input, project });
 }
+
+executeAction(updateAction);
