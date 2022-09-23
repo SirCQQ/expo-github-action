@@ -15758,7 +15758,9 @@ function wrappy (fn, cb) {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.updateAction = exports.updateInput = void 0;
 const core_1 = __nccwpck_require__(2186);
+// import {} from '@actions/github'
 const expo_1 = __nccwpck_require__(2489);
+const github_1 = __nccwpck_require__(978);
 const worker_1 = __nccwpck_require__(8912);
 const preview_comment_1 = __nccwpck_require__(4478);
 const updateInput = () => {
@@ -15771,6 +15773,7 @@ const updateInput = () => {
         messageId: (0, core_1.getInput)('message-id') || preview_comment_1.DEFAULT_ID,
         project: (0, core_1.getInput)('project'),
         githubToken: (0, core_1.getInput)('github-token'),
+        context: (0, github_1.pullContext)(),
     };
 };
 exports.updateInput = updateInput;

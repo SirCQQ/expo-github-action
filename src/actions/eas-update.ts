@@ -1,6 +1,8 @@
 import { getBooleanInput, getInput } from '@actions/core';
 
+// import {} from '@actions/github'
 import { projectInfo, projectOwner } from '../expo';
+import { pullContext } from '../github';
 import { executeAction } from '../worker';
 import { CommentInput, DEFAULT_ID, DEFAULT_MESSAGE } from './preview-comment';
 
@@ -14,6 +16,7 @@ export const updateInput = () => {
     messageId: getInput('message-id') || DEFAULT_ID,
     project: getInput('project'),
     githubToken: getInput('github-token'),
+    context: pullContext(),
   };
 };
 
