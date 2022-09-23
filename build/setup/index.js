@@ -67545,7 +67545,17 @@ async function setupAction(input = setupInput()) {
         (0, core_1.info)(`Skipped authentication: 'token' not provided.`);
     }
     else {
-        await (0, core_1.group)('Validating authenticated account', () => (0, expo_1.authenticate)(input.token, input.easVersion ? 'eas' : input.expoVersion ? 'expo' : undefined));
+        await (0, core_1.group)('Validating authenticated account', async () => {
+            if (input.easVersion) {
+                (0, expo_1.authenticate)(input.token, 'eas');
+            }
+            if (input.expoVersion) {
+                (0, expo_1.authenticate)(input.token, 'expo');
+            }
+            else {
+                (0, expo_1.authenticate)(input.token, undefined);
+            }
+        });
     }
     if (!input.patchWatchers) {
         (0, core_1.info)(`Skipped patching watchers: 'patch-watchers' disabled.`);
